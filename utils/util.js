@@ -9,11 +9,51 @@ const formatTime = date => {
   return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
 }
 
+const formatDate = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return `${[year, month, day].map(formatNumber).join('/')}`
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
 
+const getDaysBetween = (formerDate, latterDate) => {
+  // 计算第几天
+  var msecondOfOneDay = 1000 * 60 * 60 * 24;
+  var nTime = latterDate - formerDate;
+  var days = Math.floor(nTime / msecondOfOneDay);
+  // console.log(days);
+  return days + 1;
+}
+
+const getDays = (time, type) => {
+  //计算所有type的days
+  var days, prefix;
+  var today = new Date();
+  if (type == 0) {
+    prefix = "第";
+    days = getDaysBetween(time, today);
+  } else if (type == 1) {
+    prefix = "还有";
+    var currentYear = today.getFullYear();
+    if (today.getMonth() > time.getMonth() || 
+        (today.getMonth() == time && today.getDate() > time.getDate()))
+      time.setFullYear(currentYear + 1);
+    else
+      time.setFullYear(currentYear);
+    days = getDaysBetween(today, time);
+  }
+  return {time: time, days: days, prefix: prefix};
+}
+
 module.exports = {
-  formatTime
+  formatTime,
+  formatDate,
+  getDaysBetween,
+  getDays
 }

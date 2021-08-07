@@ -1,0 +1,16 @@
+<!--pages/eventDetail/eventDetail.wxml-->
+
+<view>
+  <image class='background' src="cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg" mode="aspectFill"></image>
+  <view class="section">
+    <view class="box">{{event.content}} {{event.prefix}}{{event.days}}天</view>
+    <view class="box">图片</view>
+    <view class="box">{{event.date_type_prefix}}: {{event.time}}</view>
+    <view class="box">
+      <button>保存</button>
+    </view>
+    <view class="box">
+      <button class="box" bindtap="goBack">取消</button>
+    </view>
+  </view>
+</view>

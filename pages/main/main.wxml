@@ -1,2 +1,28 @@
 <!--pages/main/main.wxml-->
 
+<view>
+  <image class='background' src="cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg" mode="aspectFill"></image>
+  <view class="flex-wrp-col">
+    <view>顶置事件</view>
+    <view class="flex-wrp-row">
+      <view class="item-left flex-wrp-row">切换</view>
+      <view class="item-right flex-wrp-row">添加</view>
+    </view>
+    <view>普通事件</view>
+    <view wx:for="{{events}}" wx:key="key" class="flex-wrp-row event">
+      <view class="flex-wrp-col" bindtap="enterEventDetail" data-eid="{{item.eid}}">
+        <view class="flex-wrp-row">
+          <view class="item-left flex-wrp-col">
+            <text>{{item.content}}</text>
+          </view>
+          <view class="item-right flex-wrp-col">
+            <text>{{item.prefix}}{{item.days}}天</text>
+          </view> 
+        </view>
+        <view class="flex-wrp-row">
+          <text>{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

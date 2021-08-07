@@ -23,6 +23,12 @@ Page({
         canIUseGetUserProfile: true
       })
     }
+    var getDaysBetween = require("../../utils/util.js").getDaysBetween;
+    getDaysBetween(new Date(2021, 5, 17), new Date());
+    // var getEvent = require("../../utils/dataQuery.js").retrieveEventsById;
+    // getEvent("28ee4e3e60e3ce092817269805427e3f").then(res => {
+    //   console.log(res.data);
+    // })
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -47,5 +53,10 @@ Page({
   },
   clickMe: function() {
     this.setData({motto: "after click"})
+  },
+  enterMainPage: function() {
+    wx.navigateTo({
+      url: '../main/main'
+    })
   }
 })
