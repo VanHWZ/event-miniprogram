@@ -29,6 +29,25 @@ Page({
     // getEvent("28ee4e3e60e3ce092817269805427e3f").then(res => {
     //   console.log(res.data);
     // })
+    var createEvent = require("../../utils/dataQuery.js").createEvent;
+    var updateEvent = require("../../utils/dataQuery.js").updateEvent;
+    // createEvent({
+    //   content: "进入考研考场",
+    //   pic_url: "",
+    //   sticky_on_top: false,
+    //   time: new Date("2021-12-26"),
+    //   type: 2
+    // }).then(res => {
+    //   console.log("create");
+    //   console.log(res);
+    // });
+    // updateEvent(
+    //   "14139e12610f3b6b038cf63c4c627471", 
+    //   {content: "2021考研!!fight!!", time: new Date("2021-12-26")}
+    // ).then(res => {
+    //   console.log("update");
+    //   console.log(res);
+    // });
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -36,7 +55,7 @@ Page({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
         console.log(res)
-        this.setData({
+        this.setData({ 
           userInfo: res.userInfo,
           hasUserInfo: true
         })

@@ -5,11 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    query: {},
-    utils: {},
-    event: {},
+    event: {
+      content: "header",
+      date_type_prefix: "起始日",
+      days: 100,
+      type: 0
+    },
     eid: "",
-    src: "cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg"
+    src: "cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg",
+    header_prompt: "已经"
   },
 
   /**
@@ -17,34 +21,72 @@ Page({
    */
   onLoad: function (options) {
     var query = require("../../utils/dataQuery.js");
-    var utils = require("../../utils/util.js");
     this.setData({eid: options.eid});
     query.retrieveEventsById(options.eid).then(res => {
         res.data.forEach(element => {
-          var getDaysResult = utils.getDays(element.time, element.type);
-          var date_type_prefix;
-          if (element.type == 0)
-            date_type_prefix = "起始日";
-          else
-            date_type_prefix = "目标日";
-          this.setData({event: {
-            content: element.content,
-            type: element.type,
-            time: utils.formatDate(getDaysResult.time),
-            pic_url: element.pic_url,
-            days: getDaysResult.days,
-            prefix: getDaysResult.prefix,
-            date_type_prefix: date_type_prefix
-          }});
+          this.setPage(element);
         })
       })
-  
+  },
+  setPage: function(event) {
+    var utils = require("../../utils/util.js");
+    var getDaysResult = utils.getDays(event.time, event.type);
+    var date_type_prefix;
+    if (event.type == 0) {
+      date_type_prefix = "起始日";
+      header_prompt = "已经";
+    }
+    else {
+      date_type_prefix = "目标日";
+      header_prompt = "还有";
+    }
+    this.setData({event: {
+      content: event.content,
+      type: event.type,
+      time: utils.formatDate(getDaysResult.time),
+      pic_url: event.pic_url,
+      days: getDaysResult.days,
+      date_type_prefix: date_type_prefix,
+      header_prompt: header_prompt,
+      type: event.type
+    }});
+    console.log(this.data);
   },
   goBack: function() {
     wx.navigateBack({
       delta: 1,
+    });
+  },
+  bindContentChange: function(e) {
+    this.setData({
+      'event.content': e.detail.value
+    });
+  },
+  bindTimeChange: function(e) {
+    this.setData({
+      'event.time': e.detail.value
+    });
+  },
+  saveEvent: function() {
+    console.log(this.data.event);
+    var updateEvent = require("../../utils/dataQuery.js").updateEvent;
+    updateEvent(
+      this.eid,
+      {content: this.data.event.content, time: new Date(this.data.event.time)}
+    ).then(res => {
+      console.log(res);
+      if (res.stats.updated > 0) {
+        console.log("update successfully");
+        this.setPage({
+          pic_url: this.data.event.pic_url,
+          content: this.data.event.content,
+          time: new Date(this.data.event.time),
+          type: this.data.event.type
+        })
+      }
     })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

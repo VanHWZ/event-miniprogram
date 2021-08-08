@@ -14,7 +14,7 @@ const formatDate = date => {
   const month = date.getMonth() + 1
   const day = date.getDate()
 
-  return `${[year, month, day].map(formatNumber).join('/')}`
+  return `${[year, month, day].map(formatNumber).join('-')}`
 }
 
 const formatNumber = n => {
@@ -38,7 +38,7 @@ const getDays = (time, type) => {
   if (type == 0) {
     prefix = "第";
     days = getDaysBetween(time, today);
-  } else if (type == 1) {
+  } else {
     prefix = "还有";
     var currentYear = today.getFullYear();
     if (today.getMonth() > time.getMonth() || 

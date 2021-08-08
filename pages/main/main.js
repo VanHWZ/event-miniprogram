@@ -14,23 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var events = [];
-    var query = require("../../utils/dataQuery.js");
-    var utils = require("../../utils/util.js");
-    query.retrieveEvents().then(res => {
-      res.data.forEach(element => {
-        var getDaysResult = utils.getDays(element.time, element.type);
-        events.push({
-          time: utils.formatDate(getDaysResult.time),
-          content: element.content,
-          days: getDaysResult.days,
-          eid: element._id,
-          prefix: getDaysResult.prefix
-        })
-      });
-      this.setData({events: events});
-      console.log(events);
-    });
+
   },
   enterEventDetail: function(element) {
     var eid = element.currentTarget.dataset.eid;
@@ -51,7 +35,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var events = [];
+    var query = require("../../utils/dataQuery.js");
+    var utils = require("../../utils/util.js");
+    query.retrieveEvents().then(res => {
+      res.data.forEach(element => {
+        var getDaysResult = utils.getDays(element.time, element.type);
+        events.push({
+          time: utils.formatDate(getDaysResult.time),
+          content: element.content,
+          days: getDaysResult.days,
+          eid: element._id,
+          prefix: getDaysResult.prefix
+        })
+      });
+      this.setData({events: events});
+      console.log(events);
+    });
   },
 
   /**
