@@ -36,8 +36,8 @@ const getDays = (time, type) => {
   var days, prefix;
   var today = new Date();
   if (type == 0) {
-    prefix = "第";
-    days = getDaysBetween(time, today);
+    prefix = "已经";
+    days = getDaysBetween(time, today) - 1;
   } else {
     prefix = "还有";
     var currentYear = today.getFullYear();

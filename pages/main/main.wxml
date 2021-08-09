@@ -5,24 +5,19 @@
   <view class="flex-wrp-col">
     <view>顶置事件</view>
     <view class="flex-wrp-row">
-      <view class="item-left flex-wrp-row">切换</view>
-      <view class="item-right flex-wrp-row">添加</view>
+      <view class="item-left">切换</view>
+      <view class="item-right">添加</view>
     </view>
-    <view>普通事件</view>
-    <view wx:for="{{events}}" wx:key="key" class="flex-wrp-row event">
-      <view class="flex-wrp-col" bindtap="enterEventDetail" data-eid="{{item.eid}}">
-        <view class="flex-wrp-row">
-          <view class="item-left flex-wrp-col">
-            <text>{{item.content}}</text>
-          </view>
-          <view class="item-right flex-wrp-col">
-            <text>{{item.prefix}}{{item.days}}天</text>
-          </view> 
-        </view>
-        <view class="flex-wrp-row">
-          <text>{{item.time}}</text>
-        </view>
+    <view wx:for="{{events}}" wx:key="key" class="event" bindtap="enterEventDetail" data-eid="{{item.eid}}">
+      <view class="content">
+        <text class="font-content">{{item.content}} {{item.prefix}}</text>
       </view>
+      <view class="pad-num-of-days">
+        <text class="font-num-of-days">{{item.days}}</text>
+      </view> 
+      <view class="pad-unit">
+        <text class="font-unit">天</text>
+      </view> 
     </view>
   </view>
 </view>

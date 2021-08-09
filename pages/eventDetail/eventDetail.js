@@ -71,7 +71,7 @@ Page({
     console.log(this.data.event);
     var updateEvent = require("../../utils/dataQuery.js").updateEvent;
     updateEvent(
-      this.eid,
+      this.data.eid,
       {content: this.data.event.content, time: new Date(this.data.event.time)}
     ).then(res => {
       console.log(res);

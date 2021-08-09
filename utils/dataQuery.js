@@ -19,6 +19,7 @@ const retrieveEventsById = eid => {
 const updateEvent = (eid, new_content) => {
   wx.cloud.init();
   const db = wx.cloud.database();
+  console.log(eid, new_content);
   return db.collection("events").where({
     _id: eid
   }).update({
