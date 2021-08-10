@@ -23,7 +23,7 @@ const formatNumber = n => {
 }
 
 const getDaysBetween = (formerDate, latterDate) => {
-  // 计算第几天
+  // 计算第几天，后减前
   var msecondOfOneDay = 1000 * 60 * 60 * 24;
   var nTime = latterDate - formerDate;
   var days = Math.floor(nTime / msecondOfOneDay);

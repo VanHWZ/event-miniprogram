@@ -6,20 +6,25 @@
     <view class="pt-100">
       <view class="flex-wrp-col day calendar">
         <view class="flex-wrp-row pad">
-          <input class="header-input" type="text" value="" placeholder="请输入事件描述" placeholder-style="color:white" bindblur="bindContentChange"/>
+          <input class="header-input" type="text" value="{{event.content}}" placeholder="请输入事件描述" placeholder-style="color:rgba(255,255,255,0.7)" bindblur="bindContentChange"/>
         </view>
         <view class="flex-wrp-row">
           <text class="num-of-day">100</text>
         </view>
         <view class="flex-wrp-row pb-20">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{eventTypes}}">
+            <view class="picker">
+              事件类型：{{eventTypes[index]}}
+            </view>
+          </picker>
           <picker mode="date" value="2000-01-01" start="1980-01-01" end="2100-01-01" bindchange="bindTimeChange">
-            <text>日期: 2000-01-01</text>
+            <text>日期: {{event.time}}</text>
           </picker>
         </view>
       </view>
     </view>
     <view class="pt-20"></view>
-    <view class="button flex-wrp-row" hover-class="button-hover" bindtap="saveEvent">
+    <view class="button flex-wrp-row" hover-class="button-hover" bindtap="addEvent">
       <text class="button-text">保存</text>
     </view>
     <view class="button flex-wrp-row" hover-class="button-hover" bindtap="goBack">

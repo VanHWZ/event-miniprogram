@@ -16,20 +16,26 @@ const retrieveEventsById = eid => {
   return events.get();
 }
 
-const updateEvent = (eid, new_content) => {
+const updateEvent = (eid, updatedEvent) => {
   wx.cloud.init();
   const db = wx.cloud.database();
-  console.log(eid, new_content);
+  console.log(eid, updatedEvent);
   return db.collection("events").where({
     _id: eid
   }).update({
-    data: new_content
+    data: updatedEvent
   });
 }
 
 const createEvent = new_event => {
   wx.cloud.init();
   const db = wx.cloud.database();
+  default_event = {
+    pic_url: "",
+    sticky_on_top: false
+  };
+  var combined_event = Object.assign(new_event, default_event);
+  console.log(combined_event);
   return db.collection("events").add({data: new_event});
 }
 
