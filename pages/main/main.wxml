@@ -1,23 +1,47 @@
 <!--pages/main/main.wxml-->
 
 <view>
-  <image class='background' src="cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg" mode="aspectFill"></image>
+  <image class='background' src="cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor7.jpg" mode="aspectFill"></image>
   <view class="flex-wrp-col">
-    <view>顶置事件</view>
-    <view class="flex-wrp-row">
-      <view class="item-left">切换</view>
-      <view class="item-right">添加</view>
-    </view>
-    <view wx:for="{{events}}" wx:key="key" class="event" bindtap="enterEventDetail" data-eid="{{item.eid}}">
-      <view class="content">
-        <text class="font-content">{{item.content}} {{item.prefix}}</text>
+    <view class="top-border">
+      <view class="flex-wrp-row top">
+        <view class="flex-wrp-col flex-10">
+          <view class="top-content">
+            <text class="font-top-content">和燕儿在一起已经</text>
+          </view>
+          <view class="top-time">
+            <text class="font-top-time">起始日：2021-06-17</text>
+          </view>
+        </view>
+        <view class="flex-wrp-col flex-2">
+          <text class="font-top-num-of-days">53</text>
+        </view>
+        <view class="flex-wrp-col flex-2">
+          <text>Days</text>
+        </view>
       </view>
-      <view class="pad-num-of-days">
-        <text class="font-num-of-days">{{item.days}}</text>
-      </view> 
-      <view class="pad-unit">
-        <text class="font-unit">天</text>
-      </view> 
     </view>
+    <view >
+      <button>添加</button>
+    </view>
+    <scroll-view
+      scroll-y style="width: 100%; height: 800rpx;"
+      refresher-enabled="{{true}}"
+      refresher-triggered="{{triggered}}"
+      refresher-default-style="white"
+      bindrefresherrefresh="OnRefresh"
+    >
+      <view wx:for="{{events}}" wx:key="key" class="event" bindtap="enterEventDetail" data-eid="{{item.eid}}">
+        <view class="content flex-10">
+          <text class="font-content">{{item.content}}{{item.prefix}}</text>
+        </view>
+        <view class="pad-num-of-days flex-2">
+          <text class="font-num-of-days">{{item.days}}</text>
+        </view> 
+        <view class="pad-unit flex-1">
+          <text class="font-unit">天</text>
+        </view> 
+      </view>
+    </scroll-view>
   </view>
 </view>

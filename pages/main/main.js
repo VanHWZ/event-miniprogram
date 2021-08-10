@@ -8,6 +8,23 @@ Page({
     events: {},
     query: {},
     utils: {},
+    triggered: false,
+    top: {
+      content: "顶置事件",
+      date_type_prefix: "起始日",
+      
+    }
+  },
+  OnRefresh: function() {
+    if (this._freshing) return;
+    this._freshing = true;
+    this.setEventList();
+    setTimeout(() => {
+      this.setData({
+        triggered: false,
+      });
+      this._freshing = false;
+    }, 1000);
   },
 
   /**
@@ -16,6 +33,7 @@ Page({
   onLoad: function (options) {
 
   },
+
   enterEventDetail: function(element) {
     var eid = element.currentTarget.dataset.eid;
     // console.log(eid);
@@ -31,10 +49,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  setEventList: function() {
     var events = [];
     var query = require("../../utils/dataQuery.js");
     var utils = require("../../utils/util.js");
@@ -52,6 +67,13 @@ Page({
       this.setData({events: events});
       console.log(events);
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.setEventList();
   },
 
   /**

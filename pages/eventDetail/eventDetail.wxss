@@ -47,7 +47,7 @@
 
 .num-of-day {
   font-size: 10rem;
-  font-weight: lighter;
+  font-weight: 600;
   font-family: 'Impact';
   margin-left: 80rpx;
   margin-right: 80rpx;
