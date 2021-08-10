@@ -1,20 +1,19 @@
-<!--pages/eventDetail/eventDetail.wxml-->
+<!--pages/addEvent/addEvent.wxml-->
 
 <view>
   <image class='background' src="cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor7.jpg" mode="aspectFill"></image>
   <view class="section">
     <view class="pt-100">
       <view class="flex-wrp-col day calendar">
-        <view class="flex-wrp-row pad {{event.pad_color}}">
-          <input class="header-input" type="text" value="{{event.content}}" bindblur="bindContentChange"/>
-          <text class="header" user-select="true">{{event.header_prompt}}</text>
+        <view class="flex-wrp-row pad">
+          <input class="header-input" type="text" value="" placeholder="请输入事件描述" placeholder-style="color:white" bindblur="bindContentChange"/>
         </view>
         <view class="flex-wrp-row">
-          <text class="num-of-day">{{event.days}}</text>
+          <text class="num-of-day">100</text>
         </view>
         <view class="flex-wrp-row pb-20">
-          <picker mode="date" value="{{event.time}}" start="1980-01-01" end="2100-01-01" bindchange="bindTimeChange">
-            <text>{{event.date_type_prefix}}: {{event.time}}</text>
+          <picker mode="date" value="2000-01-01" start="1980-01-01" end="2100-01-01" bindchange="bindTimeChange">
+            <text>日期: 2000-01-01</text>
           </picker>
         </view>
       </view>

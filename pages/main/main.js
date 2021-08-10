@@ -11,8 +11,9 @@ Page({
     triggered: false,
     top: {
       content: "顶置事件",
-      date_type_prefix: "起始日",
-      
+      prefix: "起始日",
+      time: "2000-01-01",
+      days: 100
     }
   },
   OnRefresh: function() {
@@ -50,23 +51,63 @@ Page({
   },
 
   setEventList: function() {
-    var events = [];
+    var futureEvents = [];
+    var pastEvents = [];
+    var allEvents = [];
     var query = require("../../utils/dataQuery.js");
     var utils = require("../../utils/util.js");
     query.retrieveEvents().then(res => {
       res.data.forEach(element => {
         var getDaysResult = utils.getDays(element.time, element.type);
-        events.push({
+        if (element.sticky_on_top)
+          this.setData({
+            top: {
+              content: element.content,
+              date_type_prefix: getDaysResult.date_type_prefix,
+              time: utils.formatDate(getDaysResult.time),
+              days: getDaysResult.days
+            }
+          });
+        if (element.type == 0)
+          pastEvents.push({
+            time: utils.formatDate(getDaysResult.time),
+            content: element.content,
+            days: getDaysResult.days,
+            eid: element._id,
+            prefix: getDaysResult.prefix,
+            pad_num_of_days_color: "pad-num-of-days-past",
+            pad_unit_color: "pad-unit-past"
+          });
+        else
+          futureEvents.push({
           time: utils.formatDate(getDaysResult.time),
           content: element.content,
           days: getDaysResult.days,
           eid: element._id,
-          prefix: getDaysResult.prefix
-        })
+          prefix: getDaysResult.prefix,
+          pad_num_of_days_color: "pad-num-of-days-future",
+          pad_unit_color: "pad-unit-future"
+        });
       });
-      this.setData({events: events});
-      console.log(events);
+      pastEvents.sort(this.eventCompare("days"));
+      futureEvents.sort(this.eventCompare("days"));
+      allEvents = pastEvents.concat(futureEvents);
+      this.setData({events: allEvents});
+      // console.log(pastEvents);
+      // console.log(futureEvents)
     });
+  },
+  eventCompare: function(key) {
+    return function(m, n) {
+      var a = m[key];
+      var b = n[key];
+      return a - b;
+    }
+  },
+  addEvent: function() {
+    wx.navigateTo({
+      url: '../addEvent/addEvent'
+    })
   },
 
   /**

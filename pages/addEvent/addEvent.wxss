@@ -1,4 +1,4 @@
-/* pages/eventDetail/eventDetail.wxss */
+/* pages/addEvent/addEvent.wxss */
 
 .flex-wrp-row {
   display: flex;
@@ -54,16 +54,9 @@
 }
 
 .pad {
+  background-image: linear-gradient(to bottom, #0acffe 0%, #2f44ff 100%);
   padding: 40rpx;
   border-radius: 20rpx 20rpx 0rpx 0rpx;
-}
-
-.pad-future {
-  background-image: linear-gradient(to bottom, #0acffe 0%, #2f44ff 100%);
-}
-
-.pad-past {
-  background-image: linear-gradient(to top, #f86300 0%, #fad000 80%);
 }
 
 .header {

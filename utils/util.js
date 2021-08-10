@@ -33,13 +33,15 @@ const getDaysBetween = (formerDate, latterDate) => {
 
 const getDays = (time, type) => {
   //计算所有type的days
-  var days, prefix;
+  var days, prefix, date_type_prefix;
   var today = new Date();
   if (type == 0) {
     prefix = "已经";
+    date_type_prefix = "起始日";
     days = getDaysBetween(time, today) - 1;
   } else {
     prefix = "还有";
+    date_type_prefix = "目标日";
     var currentYear = today.getFullYear();
     if (today.getMonth() > time.getMonth() || 
         (today.getMonth() == time && today.getDate() > time.getDate()))
@@ -48,7 +50,12 @@ const getDays = (time, type) => {
       time.setFullYear(currentYear);
     days = getDaysBetween(today, time);
   }
-  return {time: time, days: days, prefix: prefix};
+  return {
+    time: time, 
+    days: days, 
+    prefix: prefix, 
+    date_type_prefix: date_type_prefix
+  };
 }
 
 module.exports = {

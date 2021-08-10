@@ -76,6 +76,6 @@ Page({
   enterMainPage: function() {
     wx.navigateTo({
       url: '../main/main'
-    })
+    });
   }
 })

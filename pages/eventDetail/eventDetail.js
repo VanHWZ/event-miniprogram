@@ -9,11 +9,11 @@ Page({
       content: "header",
       date_type_prefix: "起始日",
       days: 100,
-      type: 0
+      type: 0,
+      header_prompt: "已经"
     },
     eid: "",
     src: "cloud://mini-prd-1g478uj7eef9a54f.6d69-mini-prd-1g478uj7eef9a54f-1306410776/floor.jpg",
-    header_prompt: "已经"
   },
 
   /**
@@ -31,15 +31,13 @@ Page({
   setPage: function(event) {
     var utils = require("../../utils/util.js");
     var getDaysResult = utils.getDays(event.time, event.type);
-    var date_type_prefix;
-    if (event.type == 0) {
-      date_type_prefix = "起始日";
-      header_prompt = "已经";
-    }
-    else {
-      date_type_prefix = "目标日";
-      header_prompt = "还有";
-    }
+    var date_type_prefix, pad_color;
+    date_type_prefix = getDaysResult.date_type_prefix;
+    header_prompt = getDaysResult.prefix;
+    if (event.type == 0)
+      pad_color = "pad-past";
+    else
+      pad_color = "pad-future";
     this.setData({event: {
       content: event.content,
       type: event.type,
@@ -48,7 +46,8 @@ Page({
       days: getDaysResult.days,
       date_type_prefix: date_type_prefix,
       header_prompt: header_prompt,
-      type: event.type
+      type: event.type,
+      pad_color: pad_color
     }});
     console.log(this.data);
   },

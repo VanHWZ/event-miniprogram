@@ -7,22 +7,24 @@
       <view class="flex-wrp-row top">
         <view class="flex-wrp-col flex-10">
           <view class="top-content">
-            <text class="font-top-content">和燕儿在一起已经</text>
+            <text class="font-top-content">{{top.content}}</text>
           </view>
           <view class="top-time">
-            <text class="font-top-time">起始日：2021-06-17</text>
+            <text class="font-top-time">{{top.date_type_prefix}}：{{top.time}}</text>
           </view>
         </view>
-        <view class="flex-wrp-col flex-2">
-          <text class="font-top-num-of-days">53</text>
+        <view class="flex-wrp-col top-num-of-days flex-2">
+          <text class="font-top-num-of-days">{{top.days}}</text>
         </view>
-        <view class="flex-wrp-col flex-2">
-          <text>Days</text>
+        <view class="flex-wrp-col top-unit flex-2">
+          <text class="font-top-unit">Days</text>
         </view>
       </view>
     </view>
-    <view >
-      <button>添加</button>
+    <view>
+      <view class="button flex-wrp-row" hover-class="button-hover" bindtap="addEvent">
+        <text class="button-text">添加</text>
+      </view>
     </view>
     <scroll-view
       scroll-y style="width: 100%; height: 800rpx;"
@@ -35,10 +37,10 @@
         <view class="content flex-10">
           <text class="font-content">{{item.content}}{{item.prefix}}</text>
         </view>
-        <view class="pad-num-of-days flex-2">
+        <view class="pad-num-of-days {{item.pad_num_of_days_color}} flex-2">
           <text class="font-num-of-days">{{item.days}}</text>
         </view> 
-        <view class="pad-unit flex-1">
+        <view class="pad-unit {{item.pad_unit_color}} flex-1">
           <text class="font-unit">天</text>
         </view> 
       </view>

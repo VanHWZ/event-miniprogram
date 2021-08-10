@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/main/main",
-    "pages/eventDetail/eventDetail"
+    "pages/eventDetail/eventDetail",
+    "pages/addEvent/addEvent"
   ],
   "window": {
     "backgroundTextStyle": "light",
