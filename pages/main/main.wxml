@@ -33,7 +33,7 @@
       refresher-default-style="white"
       bindrefresherrefresh="OnRefresh"
     >
-      <view wx:for="{{events}}" wx:key="key" class="event" bindtap="enterEventDetail" data-eid="{{item.eid}}">
+      <view wx:for="{{events}}" wx:key="key" class="event" bindtap="enterEventDetail" data-eid="{{item.eid}}" bindlongpress="longPressEvent">
         <view class="content flex-10">
           <text class="font-content">{{item.content}}{{item.prefix}}</text>
         </view>
@@ -47,3 +47,5 @@
     </scroll-view>
   </view>
 </view>
+<mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{groups}}" title="这是一个标题，可以为一行或者两行。">
+</mp-actionSheet>

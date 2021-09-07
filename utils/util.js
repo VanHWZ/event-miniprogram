@@ -28,7 +28,7 @@ const getDaysBetween = (formerDate, latterDate) => {
   var nTime = latterDate - formerDate;
   var days = Math.floor(nTime / msecondOfOneDay);
   // console.log(days);
-  return days + 1;
+  return days;
 }
 
 const getDays = (time, type) => {
@@ -38,7 +38,7 @@ const getDays = (time, type) => {
   if (type == 0) {
     prefix = "已经";
     date_type_prefix = "起始日";
-    days = getDaysBetween(time, today) - 1;
+    days = getDaysBetween(time, today);
   } else {
     prefix = "还有";
     date_type_prefix = "目标日";

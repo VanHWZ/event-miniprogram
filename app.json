@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
     "pages/main/main",
     "pages/eventDetail/eventDetail",
-    "pages/addEvent/addEvent"
+    "pages/addEvent/addEvent",
+    "pages/index/index",
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

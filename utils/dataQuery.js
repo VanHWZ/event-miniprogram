@@ -39,9 +39,18 @@ const createEvent = new_event => {
   return db.collection("events").add({data: new_event});
 }
 
+const deleteEvent = eid => {
+  wx.cloud.init();
+  const db = wx.cloud.database();
+  return db.collection("events").where({
+    _id: eid
+  }).remove();
+}
+
 module.exports = {
   retrieveEvents,
   retrieveEventsById,
   updateEvent,
-  createEvent
+  createEvent,
+  deleteEvent
 }

@@ -14,7 +14,8 @@ Page({
       prefix: "起始日",
       time: "2000-01-01",
       days: 100
-    }
+    },
+    longPressList: ["删除"]
   },
   OnRefresh: function() {
     if (this._freshing) return;
@@ -103,6 +104,22 @@ Page({
       var b = n[key];
       return a - b;
     }
+  },
+  longPressEvent: function(element) {
+    var query = require("../../utils/dataQuery.js");
+    var eid = element.currentTarget.dataset.eid;
+    var that = this;
+    wx.showActionSheet({
+      itemList: that.data.longPressList,
+      success: function(res) {
+        if (!res.cancel) {
+          query.deleteEvent(eid).then(res => {
+            console.log(res);
+            that.setEventList();
+          })
+        }
+      }
+  });
   },
   addEvent: function() {
     wx.navigateTo({
