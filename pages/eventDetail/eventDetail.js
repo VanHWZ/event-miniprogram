@@ -74,7 +74,7 @@ Page({
       {content: this.data.event.content, time: new Date(this.data.event.time)}
     ).then(res => {
       console.log(res);
-      if (res.stats.updated == 1) {
+      if (res.result.stats.updated == 1) {
         console.log("update successfully");
         this.setPage({
           pic_url: this.data.event.pic_url,
@@ -83,7 +83,7 @@ Page({
           type: this.data.event.type
         })
       }
-    })
+    }).catch(console.error)
   },
 
 

@@ -17,14 +17,20 @@ const retrieveEventsById = eid => {
 }
 
 const updateEvent = (eid, updatedEvent) => {
-  wx.cloud.init();
-  const db = wx.cloud.database();
-  console.log(eid, updatedEvent);
-  return db.collection("events").where({
-    _id: eid
-  }).update({
-    data: updatedEvent
-  });
+  wx.cloud.init()
+  const db = wx.cloud.database()
+  console.log(eid, updatedEvent)
+  var result
+  return wx.cloud.callFunction({
+    // 云函数名称
+    name: 'updateEvent',
+    // 传给云函数的参数
+    data: {
+      ...updatedEvent,
+      eid: eid,
+    },
+  })
+  return result
 }
 
 const createEvent = new_event => {
