@@ -39,7 +39,7 @@ const getDays = (time, type) => {
     prefix = "已经";
     date_type_prefix = "起始日";
     days = getDaysBetween(time, today);
-  } else {
+  } else if (type == 1) {
     prefix = "还有";
     date_type_prefix = "目标日";
     var currentYear = today.getFullYear();
@@ -48,7 +48,11 @@ const getDays = (time, type) => {
       time.setFullYear(currentYear + 1);
     else
       time.setFullYear(currentYear);
-    days = getDaysBetween(today, time);
+    days = getDaysBetween(today, time) + 1;
+  } else if (type == 2) {
+    prefix = "还有";
+    date_type_prefix = "目标日";
+    days = getDaysBetween(today, time) + 1;
   }
   return {
     time: time, 
